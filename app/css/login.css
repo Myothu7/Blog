@@ -1,0 +1,15 @@
+body {
+  font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5;
+}
+input[type="submit"] {
+  font-weight: 600;
+  font-size: 18px;
+}
+#create {
+  font-weight: 600;
+  font-size: 16px;
+  background-color: rgb(123, 188, 24);
+  text-decoration: none;
+  color: white;
+}
