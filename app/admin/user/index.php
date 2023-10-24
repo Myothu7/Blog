@@ -36,13 +36,13 @@
               </li>
               <li class="list-group-item d-flex justify-content-evenly align-items-center p-1 list-group-item-action">
                   <i class="bi bi-instagram fs-5 me-4 text-primary"></i>
-                  <a href="" class="fs-6 text-decoration-none text-dark">Posts</a>
+                  <a href="../post/index.php" class="fs-6 text-decoration-none text-dark">Posts</a>
                   <span class="dropdown-toggle" data-bs-toggle="collapse" href="#post" role="button" aria-expanded="false" aria-controls="collapseExample">
                   </span>
               </li>
               <li class="collapse border-0" id="post">
                  <div class="text-center p-1">
-                    <a href="create.php" class="text-decoration-none text-dark">add post</a>
+                    <a href="../post/create.php" class="text-decoration-none text-dark">add post</a>
                  </div>
               </li>
               <li class="list-group-item d-flex justify-content-evenly align-items-center p-1 list-group-item-action">
@@ -64,7 +64,7 @@
           logout</a></div>
     </div>
 <div class="col-10 bg-secondary bg-gradient border-bottom border-light">
-    <h3 class="m-4 fw-bolder text-white"><i class="bi bi-forward me-2 text-dark"></i>All Posts</h3>
+    <h3 class="m-4 fw-bolder text-white"><i class="bi bi-forward me-2 text-dark"></i>All Users</h3>
             
     <?php if(isset($_GET['delete'])): ?>
         <div class="alert alert-success alert-dismissible fade show p-2 px-3 w-50 mx-auto mb-3" role="alert">

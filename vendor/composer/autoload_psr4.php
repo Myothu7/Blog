@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Auth' => array($baseDir . '/app/auth'),
     'App\\' => array($baseDir . '/app'),
 );

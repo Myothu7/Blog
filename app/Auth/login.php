@@ -9,10 +9,10 @@ use App\Database\UserTable;
 use App\Auth\Http;
 
 $login = new UserTable(new MySQL());
-$check = $login->auth($_POST['email'], $_POST['password']);
+$check = $login->auth($_POST['email'], md5($_POST['password']));
 
 if ($check) {
-    Http::redirect("admin/user/login.php",'success');
+    Http::redirect("admin/user/index.php");
 }else{
-    echo "fail";
+    Http::redirect("admin/user/login.php","error=1");
 }

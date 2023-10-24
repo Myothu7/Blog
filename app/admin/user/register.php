@@ -11,20 +11,15 @@
     <link rel="stylesheet" href="../../css/register.css">
   </head>
   <body>
-    <?php 
-      // include('validate.php');
-    ?>
     <div class="container mt-5" style="width: 380px">
       <div class="card p-3 border-0 shadow">
-        <?php if($_POST['success']) : ?>
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-              Registration successfully!
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-        <?php endif; ?>  
-        <form method="post" action="../../auth/register.php">
+      <?php if(isset($_GET['success'])): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Registration Successfully!</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <?php endif; ?>  
+        <form method="post" action="../../Auth/register.php">
           <div class="mb-3 fs-4 text-center fw-bolder text-success">
             Sign up
           </div>
@@ -74,5 +69,7 @@
         </form>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </script>
   </body>
 </html>

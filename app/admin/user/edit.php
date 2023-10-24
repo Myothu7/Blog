@@ -10,11 +10,9 @@
     use App\Database\MySQL;
     use App\Database\UserTable;
     use App\Auth\Http;
-
     $user = new UserTable(new MySQL());
-    $data = $user->view();
-    $i = 1;
-
+    $data = $user->edit($_GET['id']);
+   
 ?>
  <div class="row mt-1">
  <div class="col-2 bg-white position-relative border-bottom border-light" style="height: 650px;">
@@ -36,13 +34,13 @@
               </li>
               <li class="list-group-item d-flex justify-content-evenly align-items-center p-1 list-group-item-action">
                   <i class="bi bi-instagram fs-5 me-4 text-primary"></i>
-                  <a href="" class="fs-6 text-decoration-none text-dark">Posts</a>
+                  <a href="../post/index.php" class="fs-6 text-decoration-none text-dark">Posts</a>
                   <span class="dropdown-toggle" data-bs-toggle="collapse" href="#post" role="button" aria-expanded="false" aria-controls="collapseExample">
                   </span>
               </li>
               <li class="collapse border-0" id="post">
                  <div class="text-center p-1">
-                    <a href="create.php" class="text-decoration-none text-dark">add post</a>
+                    <a href="../post/create.php" class="text-decoration-none text-dark">add post</a>
                  </div>
               </li>
               <li class="list-group-item d-flex justify-content-evenly align-items-center p-1 list-group-item-action">
@@ -63,47 +61,32 @@
           <i class="bi bi-escape"></i>  
           logout</a></div>
     </div>
-<div class="col-10 bg-secondary bg-gradient border-bottom border-light">
-    <h3 class="m-4 fw-bolder text-white"><i class="bi bi-forward me-2 text-dark"></i>All Posts</h3>
-            
-    <?php if(isset($_GET['delete'])): ?>
-        <div class="alert alert-success alert-dismissible fade show p-2 px-3 w-50 mx-auto mb-3" role="alert">
-            Delete Successfully!
-            <button type="button" class="btn-close mt-2 me-2" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="col-10 d-flex flex-column align-items-center justify-content-center bg-secondary bg-gradient border-bottom border-light">
+        <div class="card p-3 border-0 shadow" style="width:380px;">
+            <form method="post" action="../../Auth/update.php">
+                <h5 class="mb-1 text-center">Update User Information</h5>
+                <hr class="mb-3">
+                <div class="mb-2">
+                    <input type="hidden" name="id" value="<?= $data->id ?>">
+                    <label for="">Name</label>
+                    <input type="text" name="name" class="form-control p-1" value="<?= $data->name ?>">
+                </div>
+                <div class="mb-2">
+                    <label for="">Email</label>
+                    <input type="email" name="email" class="form-control p-1" value="<?= $data->email ?>">
+                </div>
+                <div class="mb-2">
+                    <label for="">User type</label>
+                    <input type="text" name="user_type" class="form-control p-1" value="<?= $data->user_type ?>">
+                </div>
+               
+                <div class="mt-2 d-flex  justify-content-end">
+                    <a href="index.php" class="btn btn-primary p-1">Cancel</a>
+                    <input type="submit" value="Add" class="btn btn-primary ms-2 p-1" name="submit">
+                </div>
+            </form>
         </div>
-    <?php endif; ?>  
-    <?php if(isset($_GET['update'])): ?>
-        <div class="alert alert-success alert-dismissible fade show p-2 px-3 w-50 mx-auto mb-3" role="alert">
-            Update Successfully!
-            <button type="button" class="btn-close mt-2 me-2" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>  
-    <table class="table table-striped w-50 mx-auto mt-5">
-        <thead>
-        <tr>
-            <th class="p-2">No</th>
-            <th class="p-2">Name</th>
-            <th class="p-2">Email</th>
-            <th class="p-2">User type</th>
-            <th class="p-2">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach($data as $val): ?>
-            <tr>
-                <td class="p-1"><?= $i++; ?></td>
-                <td class="p-1"><?= $val->name; ?></td>
-                <td class="p-1"><?= $val->email; ?></td>
-                <td class="p-1"><?= $val->user_type; ?></td>
-                <td class="p-1">
-                    <a href="edit.php?id=<?= $val->id ?>"><i class="bi bi-box-arrow-in-down-left me-2 text-success"></i></a>
-                    <a href="../../Auth/delete.php?id=<?= $val->id ?>"><i class="bi bi-trash text-danger"></i></a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
+    </div>
 
 
 <?php 

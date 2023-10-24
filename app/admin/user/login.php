@@ -12,8 +12,14 @@
   </head>
   <body>
     <div class="container mt-5" style="width: 380px">
+        <?php if(isset($_GET['error'])) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Invalid email or password!
+                <a href="login.php" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
+            </div>
+        <?php endif; ?>    
       <div class="card p-3 border-0 shadow">
-        <form method="post" action="../../auth/login.php">
+        <form method="post" action="../../Auth/login.php">
           <div class="mb-3 fs-4 text-center">Login to your account</div>
           <div class="mb-3">
             <label for="">Email</label>
@@ -47,5 +53,9 @@
         </form>
       </div>
     </div>
+
+
+   <!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
   </body>
 </html>
