@@ -8,10 +8,13 @@ include('../../../vendor/autoload.php');
 use App\Database\MySQL;
 use App\Database\CategoryTable;
 use App\Auth\Http;
+use App\Auth\Auth;
+    
+Auth::check();
  
 $data = new CategoryTable(new MySQL());
 $category = $data->index();
-
+session_start();
 
 ?>
  <div class="row mt-1">
@@ -45,13 +48,13 @@ $category = $data->index();
               </li>
               <li class="list-group-item d-flex justify-content-evenly align-items-center p-1 list-group-item-action">
                   <i class="bi bi-list-check fs-5 text-primary"></i>
-                  <a href="index.php" class="fs-6 text-decoration-none text-dark">Category</a>
+                  <a href="../category/index.php" class="fs-6 text-decoration-none text-dark">Category</a>
                   <span class="dropdown-toggle me-1" data-bs-toggle="collapse" href="#category" role="button" aria-expanded="false" aria-controls="collapseExample">
                   </span>
               </li>
               <li class="collapse" id="category">
                 <div class="text-center p-1">
-                    <a href="" class="text-decoration-none text-dark">add category</a>
+                    <a href="../category/create.php" class="text-decoration-none text-dark">add category</a>
                  </div>
                  <hr>
               </li>
@@ -71,7 +74,7 @@ $category = $data->index();
                     <div class="modal-body mt-2">
                         <p>Are you sure you want to log-off?</p>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="../../Auth/auth.php" class="btn btn-primary">log out</a>
+                        <a href="../../Auth/logout.php" class="btn btn-primary">log out</a>
                     </div>
                 </div>
             </div>
@@ -82,13 +85,13 @@ $category = $data->index();
     <div class="col-10 d-flex flex-column align-items-center justify-content-center bg-secondary bg-gradient border-bottom border-light">
         
         <div class="card p-3 border-0 shadow" style="width:380px;">
-            <?php if($_GET['success']) : ?>
+            <?php if(isset($_GET['success'])) : ?>
                 <div class="alert alert-success alert-dismissible fade show p-2 px-3" role="alert">
                     Upload Successfully!
                     <button type="button" class="btn-close mt-2 me-2" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>    
-            <?php if($_GET['fail']) : ?>
+            <?php if($_GET['error']) : ?>
                 <div class="alert alert-success alert-dismissible fade show p-2 px-3" role="alert">
                     Upload fail!
                     <button type="button" class="btn-close mt-2 me-2" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -100,7 +103,7 @@ $category = $data->index();
                     <button type="button" class="btn-close mt-2 me-2" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
-            <form method="post">
+            <form method="post" action="../../action/post/create.php"  enctype="multipart/form-data">
                 <h4 class="mb-1 text-primary fw-bolder">Add Post</h4>
                 <hr class="mb-3">
                 <div class="mb-2">
@@ -111,10 +114,7 @@ $category = $data->index();
                     <label for="">Content</label>
                     <textarea name="content" id="" cols="30" rows="4" class="form-control"></textarea>
                 </div>
-                <div class="mb-2">
-                    <label for="">author_id</label>
-                    <input type="text" name="author_id" class="form-control p-1">
-                </div>
+                    <input type="hidden" name="author_id" value="<?= $_SESSION['auth']['id']; ?>">
                 <div class="mb-2">
                     <label for="">category</label>
                     <select name="category_id" id="" class="form-select p-1">
@@ -126,8 +126,15 @@ $category = $data->index();
                 </div>
                 <div class="mb-2">
                     <label for="">photo</label>
-                    <input type="file" class="form-control p-1" name="photo">
+                    <input type="file" class="form-control p-1" name="photo" accepts="image/*" id="photo">
+                    <div class="mt-1 position-relative" style="display:none" id="div">
+                        <img src="" alt="img" class="form-control" id="img">
+                        <span class="position-absolute top-0 start-100 translate-middle" id="change-img">
+                            <i class="bi bi-folder-x"></i>
+                        </span>
+                    </div>
                 </div>
+                <hr class="mb-3 mt-2">
                 <div class="mb-2 d-flex  justify-content-end">
                     <a href="create.php" class="btn btn-primary p-1">Cancel</a>
                     <input type="submit" value="Add" class="btn btn-primary ms-2 p-1" name="submit">
@@ -135,8 +142,9 @@ $category = $data->index();
             </form>
         </div>
     </div>
-
-
-<?php 
-include('../layout/footer.php');
-?>
+    </div>
+  <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
+    <script src="create.js"></script>
+</body>
+</html>

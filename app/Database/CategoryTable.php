@@ -79,6 +79,18 @@ class CategoryTable
         }
     }
 
+    public function find($id)
+    {
+        try{
+            $edit = "SELECT id, name FROM categories WHERE id != $id";
+            $result = $this->db->query($edit);
+            return $result->fetchAll();
+
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
    }
 
 ?>

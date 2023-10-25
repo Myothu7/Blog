@@ -11,6 +11,10 @@
     use App\Database\UserTable;
     use App\Auth\Http;
 
+    use App\Auth\Auth;
+
+    Auth::check();
+
     $user = new UserTable(new MySQL());
     $data = $user->view();
     $i = 1;
@@ -59,9 +63,25 @@
               </li>
               
           </ul>
-          <div class="position-absolute bottom-0 ms-2"><a href="" class="text-decoration-none text-danger">
+          <div class="position-absolute bottom-0 ms-2"><a href="" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#logout">
           <i class="bi bi-escape"></i>  
           logout</a></div>
+
+          <div class="modal fade ms-5" id="logout" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content p-2">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="ModalLabel">Log out</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body mt-2">
+                        <p>Are you sure you want to log-off?</p>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="../../Auth/logout.php" class="btn btn-primary">log out</a>
+                    </div>
+                </div>
+            </div>
+          </div>
     </div>
 <div class="col-10 bg-secondary bg-gradient border-bottom border-light">
     <h3 class="m-4 fw-bolder text-white"><i class="bi bi-forward me-2 text-dark"></i>All Users</h3>

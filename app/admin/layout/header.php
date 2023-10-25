@@ -17,7 +17,9 @@
         box-sizing: border-box !important;
         font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
       }
-      
+      #change-img:hover {
+        cursor: pointer;
+      }
     </style>
 </head>
 <body>

@@ -85,10 +85,10 @@ class UserTable{
     public function auth(string $email , string $password) 
     {
         try{
-            $find = "SELECT email, password FROM users WHERE email = '$email' AND password = '$password'";
+            $find = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
             $result = $this->db->query($find)->fetch();
 
-            return $result->email ?? false;
+            return $result ?? false;
             
         }catch(PDOException $e){
             return "Err: ".$e->getMessage();

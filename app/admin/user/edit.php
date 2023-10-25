@@ -10,6 +10,10 @@
     use App\Database\MySQL;
     use App\Database\UserTable;
     use App\Auth\Http;
+    use App\Auth\Auth;
+
+    Auth::check();
+    
     $user = new UserTable(new MySQL());
     $data = $user->edit($_GET['id']);
    
@@ -57,9 +61,25 @@
               </li>
               
           </ul>
-          <div class="position-absolute bottom-0 ms-2"><a href="" class="text-decoration-none text-danger">
+          <div class="position-absolute bottom-0 ms-2"><a href="" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#logout">
           <i class="bi bi-escape"></i>  
           logout</a></div>
+
+          <div class="modal fade ms-5" id="logout" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content p-2">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="ModalLabel">Log out</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body mt-2">
+                        <p>Are you sure you want to log-off?</p>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="../../Auth/logout.php" class="btn btn-primary">log out</a>
+                    </div>
+                </div>
+            </div>
+          </div>
     </div>
     <div class="col-10 d-flex flex-column align-items-center justify-content-center bg-secondary bg-gradient border-bottom border-light">
         <div class="card p-3 border-0 shadow" style="width:380px;">
@@ -77,7 +97,13 @@
                 </div>
                 <div class="mb-2">
                     <label for="">User type</label>
-                    <input type="text" name="user_type" class="form-control p-1" value="<?= $data->user_type ?>">
+                    <!-- <input type="text" name="user_type" class="form-control p-1" value="<?= $data->user_type ?>"> -->
+                    <select name="user_type" id="" class="form-select">
+                        <option value="<?= $data->user_type ?>" hidden><?= $data->user_type ?></option>
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                        <option value="auhtor">author</option>
+                    </select>
                 </div>
                
                 <div class="mt-2 d-flex  justify-content-end">
