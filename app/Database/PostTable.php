@@ -55,7 +55,9 @@ class PostTable
     public function index()
     {
         try{
-            $posts = "SELECT * FROM posts";
+            // $posts = "SELECT * FROM posts";
+            $posts = "SELECT posts.id, posts.title, posts.content, posts.photo ,posts.author_id, users.user_type, users.name AS creater FROM `posts`
+            LEFT JOIN users ON posts.author_id = users.id";
             $posts = $this->db->query($posts);
             return $posts->fetchAll();
         }catch(PDOException $e){
@@ -140,6 +142,18 @@ class PostTable
         }
        
 
+    }
+
+    public function view()
+    {
+        try{
+            $posts = "SELECT posts.title, posts.content, posts.photo, posts.create_at AS date, categories.name AS category, users.name AS author FROM `posts`
+                        LEFT JOIN categories ON posts.category_id = categories.id LEFT JOIN users ON posts.author_id = users.id";
+            $posts = $this->db->query($posts);
+            return $posts->fetchAll();
+        }catch(PDOException $e){
+            return $e->getMessage()."".$e->getLine();
+        }
     }
 
     

@@ -15,10 +15,11 @@ $check = $login->auth($_POST['email'], md5($_POST['password']));
 if ($check) {
     session_start();
     $_SESSION['auth'] = ['id'=>$check->id, 'name'=>$check->name, 'user_type'=> $check->user_type];
+   
     if($check->user_type == "user"){
         Http::redirect('frontend/post/index.php');
     }else{
-        Http::redirect('admin/user/index.php');
+        Http::redirect('admin/post/index.php');
     }
 }else{
     Http::redirect("admin/user/login.php","error=1");

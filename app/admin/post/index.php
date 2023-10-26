@@ -16,8 +16,9 @@
 
     $post = new PostTable(new MySQL());
     $data = $post->index();
-
     $i = 1;
+
+    $check = Auth::role_and_content_creater(); 
 
 ?>
  <div class="row mt-1">
@@ -27,6 +28,7 @@
             Admin Pannel
           </div>
           <ul class="list-group rounded-0 border-0">
+              <?php if(Auth::role() == 'admin') : ?>
               <li class="list-group-item d-flex justify-content-evenly align-items-center p-1 list-group-item-action">
                   <i class="bi bi-person-lines-fill fs-5 me-3 text-primary"></i>
                   <a href="../user/index.php" class="fs-6 text-decoration-none text-dark">Users</a>
@@ -38,6 +40,7 @@
                       <a href="../user/create.php" class="text-decoration-none text-dark">add user</a>
                 </div>
               </li>
+              <?php endif; ?>
               <li class="list-group-item d-flex justify-content-evenly align-items-center p-1 list-group-item-action">
                   <i class="bi bi-instagram fs-5 me-4 text-primary"></i>
                   <a href="index.php" class="fs-6 text-decoration-none text-dark">Posts</a>
@@ -49,6 +52,7 @@
                     <a href="create.php" class="text-decoration-none text-dark">add post</a>
                  </div>
               </li>
+              <?php if(Auth::role() == 'admin') : ?>
               <li class="list-group-item d-flex justify-content-evenly align-items-center p-1 list-group-item-action">
                   <i class="bi bi-list-check fs-5 text-primary"></i>
                   <a href="../category/index.php" class="fs-6 text-decoration-none text-dark">Category</a>
@@ -61,10 +65,13 @@
                  </div>
                  <hr>
               </li>
+              <?php endif; ?>
               
           </ul>
-          <div class="position-absolute bottom-0 ms-2"><a href="" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#logout">
-          <i class="bi bi-escape"></i>  
+          <div class="position-absolute bottom-0 ms-2">
+            <div class="mb-2"><i class="bi bi-person-circle me-1"></i><?= Auth::name(); ?></div>
+            <a href="" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#logout">
+            <i class="bi bi-escape"></i>  
           logout</a></div>
 
           <div class="modal fade ms-5" id="logout" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -107,6 +114,7 @@
             <th class="p-2">Title</th>
             <th class="p-2">Content</th>
             <th class="p-2">Photo</th>
+            <th class="p-2">Content Creater</th>
             <th class="p-2">Action</th>
         </tr>
         </thead>
@@ -117,9 +125,16 @@
                 <td class="p-2"><?= $val->title; ?></td>
                 <td class="p-2"><?= $val->content; ?></td>
                 <td class="p-2"><?= $val->photo; ?></td>
+                <td class="p-2"><?= $val->creater; ?></td>
+                <?php 
+                    if($check[0] == $val->author_id || $check[1] == "admin" ) : ?>
                 <td class="p-2">
                     <a href="edit.php?id=<?= $val->id ?>"><i class="bi bi-box-arrow-in-down-left me-2 text-success"></i></a>
                     <a href="../../action/post/delete.php?id=<?= $val->id ?>"><i class="bi bi-trash text-danger"></i></a>
+                </td>
+                <?php endif; ?>
+                <td>
+                    
                 </td>
             </tr>
         <?php endforeach; ?>

@@ -25,6 +25,7 @@
             Admin Pannel
           </div>
           <ul class="list-group rounded-0 border-0">
+          <?php if(Auth::role() == 'admin') : ?>
               <li class="list-group-item d-flex justify-content-evenly align-items-center p-1 list-group-item-action">
                   <i class="bi bi-person-lines-fill fs-5 me-3 text-primary"></i>
                   <a href="index.php" class="fs-6 text-decoration-none text-dark">Users</a>
@@ -36,6 +37,7 @@
                       <a href="" class="text-decoration-none text-dark">add user</a>
                 </div>
               </li>
+          <?php endif; ?>    
               <li class="list-group-item d-flex justify-content-evenly align-items-center p-1 list-group-item-action">
                   <i class="bi bi-instagram fs-5 me-4 text-primary"></i>
                   <a href="../post/index.php" class="fs-6 text-decoration-none text-dark">Posts</a>
@@ -61,8 +63,10 @@
               </li>
               
           </ul>
-          <div class="position-absolute bottom-0 ms-2"><a href="" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#logout">
-          <i class="bi bi-escape"></i>  
+          <div class="position-absolute bottom-0 ms-2">
+            <div class="mb-2"><i class="bi bi-person-circle me-1"></i><?= Auth::name(); ?></div>
+            <a href="" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#logout">
+            <i class="bi bi-escape"></i>  
           logout</a></div>
 
           <div class="modal fade ms-5" id="logout" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
