@@ -35,11 +35,11 @@
                   <span class="dropdown-toggle" data-bs-toggle="collapse" href="#user" role="button" aria-expanded="false" aria-controls="collapseExample">
                   </span>
               </li>
-              <li class="collapse" id="user">
+              <!-- <li class="collapse" id="user">
                 <div class="text-center p-1">
                       <a href="../user/create.php" class="text-decoration-none text-dark">add user</a>
                 </div>
-              </li>
+              </li> -->
               <?php endif; ?>
               <li class="list-group-item d-flex justify-content-evenly align-items-center p-1 list-group-item-action">
                   <i class="bi bi-instagram fs-5 me-4 text-primary"></i>
@@ -69,7 +69,7 @@
               
           </ul>
           <div class="position-absolute bottom-0 ms-2">
-            <div class="mb-2"><i class="bi bi-person-circle me-1"></i><?= Auth::name(); ?></div>
+            <div class="mb-2"><i class="bi bi-person-circle me-1"></i><?= ucfirst(Auth::name()); ?></div>
             <a href="" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#logout">
             <i class="bi bi-escape"></i>  
           logout</a></div>
@@ -123,7 +123,7 @@
             <tr>
                 <td class="p-2"><?= $i++; ?></td>
                 <td class="p-2"><?= $val->title; ?></td>
-                <td class="p-2"><?= $val->content; ?></td>
+                <td class="p-2"><?= substr("$val->content",0, 20)."...."; ?></td>
                 <td class="p-2"><?= $val->photo; ?></td>
                 <td class="p-2"><?= $val->creater; ?></td>
                 <?php 

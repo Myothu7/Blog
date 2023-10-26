@@ -35,7 +35,7 @@
        
         
         <div class="d-flex">
-        <div class="mb-2 me-3"><i class="bi bi-person-circle me-1"></i> <?= Auth::name(); ?></div>
+        <div class="mb-2 me-3"><i class="bi bi-person-circle me-1"></i> <?= ucfirst(Auth::name()); ?></div>
             <a href="" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#logout">
             <i class="bi bi-escape"></i>  
           logout</a></div>

@@ -45,11 +45,11 @@ use App\Auth\Auth;
                   <span class="dropdown-toggle" data-bs-toggle="collapse" href="#user" role="button" aria-expanded="false" aria-controls="collapseExample">
                   </span>
               </li>
-              <li class="collapse" id="user">
+              <!-- <li class="collapse" id="user">
                 <div class="text-center p-1">
                       <a href="" class="text-decoration-none text-dark">add user</a>
                 </div>
-              </li>
+              </li> -->
            <?php endif; ?>   
               <li class="list-group-item d-flex justify-content-evenly align-items-center p-1 list-group-item-action">
                   <i class="bi bi-instagram fs-5 me-4 text-primary"></i>
@@ -79,7 +79,7 @@ use App\Auth\Auth;
               
           </ul>
           <div class="position-absolute bottom-0 ms-2">
-            <div class="mb-2"><i class="bi bi-person-circle me-1"></i><?= Auth::name(); ?></div>
+            <div class="mb-2"><i class="bi bi-person-circle me-1"></i><?= ucfirst(Auth::name()); ?></div>
             <a href="" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#logout">
             <i class="bi bi-escape"></i>  
           logout</a></div>

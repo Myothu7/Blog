@@ -34,11 +34,11 @@
                   <span class="dropdown-toggle" data-bs-toggle="collapse" href="#user" role="button" aria-expanded="false" aria-controls="collapseExample">
                   </span>
               </li>
-              <li class="collapse" id="user">
+              <!-- <li class="collapse" id="user">
                 <div class="text-center p-1">
                       <a href="" class="text-decoration-none text-dark">add user</a>
                 </div>
-              </li>
+              </li> -->
            <?php endif; ?>   
            
               <li class="list-group-item d-flex justify-content-evenly align-items-center p-1 list-group-item-action">
@@ -69,7 +69,7 @@
               
           </ul>
           <div class="position-absolute bottom-0 ms-2">
-            <div class="mb-2"><i class="bi bi-person-circle me-1"></i><?= Auth::name(); ?></div>
+            <div class="mb-2"><i class="bi bi-person-circle me-1"></i><?= ucfirst(Auth::name()); ?></div>
             <a href="" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#logout">
             <i class="bi bi-escape"></i>  
           logout</a></div>
@@ -118,11 +118,11 @@
         <tbody>
         <?php foreach($data as $val): ?>
             <tr>
-                <td class="p-1"><?= $i++; ?></td>
-                <td class="p-1"><?= $val->name; ?></td>
-                <td class="p-1"><?= $val->email; ?></td>
-                <td class="p-1"><?= $val->user_type; ?></td>
-                <td class="p-1">
+                <td class="p-2"><?= $i++; ?></td>
+                <td class="p-2"><?= ucfirst($val->name); ?></td>
+                <td class="p-2"><?= $val->email; ?></td>
+                <td class="p-2"><?= $val->user_type; ?></td>
+                <td class="p-2">
                     <a href="edit.php?id=<?= $val->id ?>"><i class="bi bi-box-arrow-in-down-left me-2 text-success"></i></a>
                     <a href="../../Auth/delete.php?id=<?= $val->id ?>"><i class="bi bi-trash text-danger"></i></a>
                 </td>
